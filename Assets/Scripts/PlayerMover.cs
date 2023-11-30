@@ -7,8 +7,12 @@ public class PlayerMover : MonoBehaviour
 {
     [SerializeField] private float _speed;
 
+    private readonly int Run = Animator.StringToHash(nameof(Run));
+    private readonly int Idle = Animator.StringToHash(nameof(Idle));
+
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
+
 
     private void Awake()
     {
@@ -24,13 +28,13 @@ public class PlayerMover : MonoBehaviour
         }
         else
         {
-            _animator.SetTrigger("Idle");
+            _animator.SetTrigger(Idle);
         }
     }
 
     private void Move()
     {
-        _animator.SetTrigger("Run");
+        _animator.SetTrigger(Run);
         Vector3 direction = transform.right * Input.GetAxis("Horizontal");
 
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, _speed * Time.deltaTime);
