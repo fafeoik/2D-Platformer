@@ -15,7 +15,7 @@ public class PlayerJumper : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {

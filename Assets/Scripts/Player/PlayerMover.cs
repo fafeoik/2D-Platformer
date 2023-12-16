@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
 public class PlayerMover : MonoBehaviour
 {
+    private const string Horizontal = nameof(Horizontal);
+
     [SerializeField] private float _speed;
 
     private readonly int Run = Animator.StringToHash(nameof(Run));
@@ -12,7 +14,6 @@ public class PlayerMover : MonoBehaviour
 
     private SpriteRenderer _spriteRenderer;
     private Animator _animator;
-
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class PlayerMover : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButton("Horizontal"))
+        if (Input.GetButton(Horizontal))
         {
             Move();
         }
@@ -35,7 +36,7 @@ public class PlayerMover : MonoBehaviour
     private void Move()
     {
         _animator.SetTrigger(Run);
-        Vector3 direction = transform.right * Input.GetAxis("Horizontal");
+        Vector3 direction = transform.right * Input.GetAxis(Horizontal);
 
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, _speed * Time.deltaTime);
 
