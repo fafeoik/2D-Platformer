@@ -25,17 +25,12 @@ public class Enemy : MonoBehaviour
     {
         _health -= damage;
 
-        print($"Враг получил урон. Осталось хп: {_health}.");
-
-        CheckIfDead();
+        if (_health <= 0)
+            Die();
     }
 
-    public void CheckIfDead()
+    public void Die()
     {
-        if (_health <= 0)
-        {
-            print("Враг умер.");
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 }

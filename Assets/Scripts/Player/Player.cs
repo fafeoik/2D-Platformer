@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 
     private int _health;
 
-    private void Start() 
+    private void Start()
     {
         _health = _maxHealth;
     }
@@ -20,12 +20,10 @@ public class Player : MonoBehaviour
     {
         _health += healAmount;
 
-        if(_health > _maxHealth)
+        if (_health > _maxHealth)
         {
             _health = _maxHealth;
         }
-
-        print($"Игрок съел банан и подхилился. хп: {_health}");
     }
 
     public void DealDamage(Enemy enemy)
@@ -37,17 +35,12 @@ public class Player : MonoBehaviour
     {
         _health -= damage;
 
-        print($"Игрок получил урон. Осталось хп: {_health}.");
-
-        CheckIfDead();
+        if (_health <= 0)
+            Die();
     }
 
-    public void CheckIfDead()
+    public void Die()
     {
-        if(_health <= 0)
-        {
-            print("Игрок умер.");
-            Destroy(gameObject);
-        }
+        print("Player is dead.");
     }
 }
