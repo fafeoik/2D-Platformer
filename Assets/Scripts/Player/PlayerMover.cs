@@ -1,24 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(SpriteRenderer), typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMover : MonoBehaviour
 {
     private const string Horizontal = nameof(Horizontal);
 
     [SerializeField] private float _speed;
 
-    private readonly int Run = Animator.StringToHash(nameof(Run));
-    private readonly int Idle = Animator.StringToHash(nameof(Idle));
-
     private SpriteRenderer _spriteRenderer;
-    private Animator _animator;
+
+    [SerializeField] private UnityEvent _playerRan;
+    [SerializeField] private UnityEvent _playerStopped;
 
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -29,13 +28,13 @@ public class PlayerMover : MonoBehaviour
         }
         else
         {
-            _animator.SetTrigger(Idle);
+            _playerStopped?.Invoke();
         }
     }
 
     private void Move()
     {
-        _animator.SetTrigger(Run);
+        _playerRan?.Invoke();
         Vector3 direction = transform.right * Input.GetAxis(Horizontal);
 
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, _speed * Time.deltaTime);

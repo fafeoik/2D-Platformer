@@ -4,15 +4,20 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class PlayerAttackTrigger : MonoBehaviour
+public class PlayerWeapon : MonoBehaviour
 {
-    [SerializeField] private UnityEvent<Enemy> _playerAttacked;
+    [SerializeField] private int _damage;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<Enemy>(out Enemy enemy))
         {
-            _playerAttacked?.Invoke(enemy);
+            DealDamage(enemy);
         }
+    }
+
+    private void DealDamage(Enemy enemy)
+    {
+        enemy.TakeDamage(_damage);
     }
 }

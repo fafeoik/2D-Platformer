@@ -214,8 +214,10 @@ GameObject:
   - component: {fileID: 189041479}
   - component: {fileID: 189041485}
   - component: {fileID: 189041481}
+  - component: {fileID: 189041488}
   - component: {fileID: 189041483}
-  - component: {fileID: 189041482}
+  - component: {fileID: 189041486}
+  - component: {fileID: 189041487}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -397,25 +399,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 10
---- !u!114 &189041482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189041475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8680545d74d807d4391ce0411decbeb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bananaEaten:
+  _playerRan:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 189041485}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Heal
-        m_Mode: 0
+      - m_Target: {fileID: 189041486}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: StartRunAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _playerStopped:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 189041486}
+        m_TargetAssemblyTypeName: PlayerAnimator, Assembly-CSharp
+        m_MethodName: StartIdleAnimation
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -449,9 +454,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522d486a5b2fef744b5dbf5bc3588964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &189041486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189041475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e50629c219ef1d34c9c8b7846d5aacaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &189041487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189041475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1456dfdc3e37a0e4596563234ce15c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _maxHealth: 100
-  _damage: 34
-  _attackTrigger: {fileID: 2126999547}
+--- !u!114 &189041488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189041475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8680545d74d807d4391ce0411decbeb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bananaEaten:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 189041487}
+        m_TargetAssemblyTypeName: Health, Assembly-CSharp
+        m_MethodName: Heal
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &281226318
 GameObject:
   m_ObjectHideFlags: 0
@@ -12208,6 +12262,7 @@ GameObject:
   - component: {fileID: 1475141977}
   - component: {fileID: 1475141982}
   - component: {fileID: 1475141976}
+  - component: {fileID: 1475141984}
   - component: {fileID: 1475141980}
   - component: {fileID: 1475141983}
   m_Layer: 0
@@ -12377,7 +12432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c573cf0d0efbd346b4f2bba6c940ef6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
   _damage: 20
 --- !u!50 &1475141983
 Rigidbody2D:
@@ -12406,6 +12460,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1475141984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1475141975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1456dfdc3e37a0e4596563234ce15c14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
 --- !u!1 &1530555643
 GameObject:
   m_ObjectHideFlags: 0
@@ -12635,21 +12702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab680e68abedb8c4e99aa27ee1384c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAttacked:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 189041485}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: DealDamage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  _damage: 35
 --- !u!61 &2126999548
 BoxCollider2D:
   m_ObjectHideFlags: 0

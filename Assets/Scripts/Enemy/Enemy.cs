@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(BoxCollider2D), typeof(Health))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _health;
     [SerializeField] private int _damage;
+
+    private Health _health;
+
+    private void Start()
+    {
+        _health = GetComponent<Health>();
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,14 +29,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        _health -= damage;
-
-        if (_health <= 0)
-            Die();
-    }
-
-    public void Die()
-    {
-        Destroy(gameObject);
+        _health.TakeDamage(damage);
     }
 }
