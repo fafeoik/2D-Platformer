@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class Health : MonoBehaviour
 
     private int _health;
 
+    public event UnityAction<int> HealthChanged;
+
     private void Start()
     {
         _health = _maxHealth;
+
+        HealthChanged?.Invoke(_health);
     }
 
     public void Heal(int healAmount)
@@ -21,6 +26,8 @@ public class Health : MonoBehaviour
         {
             _health = _maxHealth;
         }
+
+        HealthChanged?.Invoke(_health);
     }
 
     public void TakeDamage(int damage)
@@ -28,7 +35,12 @@ public class Health : MonoBehaviour
         _health -= damage;
 
         if (_health <= 0)
+        {
+            _health = 0;
             Die();
+        }
+
+        HealthChanged?.Invoke(_health);
     }
 
     public void Die()

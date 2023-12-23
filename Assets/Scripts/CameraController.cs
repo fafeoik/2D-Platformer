@@ -10,6 +10,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector2.Lerp(transform.position, new Vector2(_player.position.x, _player.position.y + _verticalPositionIncreaser), _speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, new Vector3(_player.position.x, _player.position.y + _verticalPositionIncreaser, transform.position.z), _speed * Time.deltaTime);
     }
 }
