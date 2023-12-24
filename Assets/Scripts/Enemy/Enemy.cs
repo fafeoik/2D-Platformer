@@ -5,30 +5,19 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D), typeof(Health))]
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int _damage;
-
-    private Health _health;
-
-    private void Start()
-    {
-        _health = GetComponent<Health>();
-    }
+    [SerializeField] private float _damage;
+    [SerializeField] private LayerMask _purposeAttack;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player))
+        if (collision.gameObject.TryGetComponent<Health>(out Health playerHealth) && _purposeAttack == (_purposeAttack | (1 << playerHealth.gameObject.layer)))
         {
-            DealDamage(player);
+            DealDamage(playerHealth);
         }
     }
 
-    public void DealDamage(Player player)
+    public void DealDamage(Health playerHealth)
     {
-        player.TakeDamage(_damage);
-    }
-
-    public void TakeDamage(int damage)
-    {
-        _health.TakeDamage(damage);
+        playerHealth.TakeDamage(_damage);
     }
 }

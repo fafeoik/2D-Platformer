@@ -5,11 +5,11 @@ using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
+    [SerializeField] private float _maxHealth;
 
-    private int _health;
+    private float _health;
 
-    public event UnityAction<int> HealthChanged;
+    public event UnityAction<float> HealthChanged;
 
     private void Start()
     {
@@ -18,7 +18,7 @@ public class Health : MonoBehaviour
         HealthChanged?.Invoke(_health);
     }
 
-    public void Heal(int healAmount)
+    public void Heal(float healAmount)
     {
         _health += healAmount;
 
@@ -30,7 +30,7 @@ public class Health : MonoBehaviour
         HealthChanged?.Invoke(_health);
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         _health -= damage;
 

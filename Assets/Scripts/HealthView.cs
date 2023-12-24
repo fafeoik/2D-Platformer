@@ -24,18 +24,18 @@ public class HealthView : MonoBehaviour
         }
     }
 
-    public void OnShowHealth(int currentHealth)
+    public void OnShowHealth(float currentHealth)
     {
        
         ShowSmoothHealthBar(currentHealth);
     }
 
-    private void ShowSmoothHealthBar(int currentHealth)
+    private void ShowSmoothHealthBar(float currentHealth)
     {
         _smoothHealthChangeCoroutine = StartCoroutine(ChangeHealthSmoothly(currentHealth));
     }
 
-    private IEnumerator ChangeHealthSmoothly(int currentHealth)
+    private IEnumerator ChangeHealthSmoothly(float currentHealth)
     {
         bool isWorking = true;
 

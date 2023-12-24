@@ -7,17 +7,18 @@ using UnityEngine.Events;
 public class PlayerWeapon : MonoBehaviour
 {
     [SerializeField] private int _damage;
+    [SerializeField] private LayerMask _purposeAttack;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<Enemy>(out Enemy enemy))
+        if (collision.TryGetComponent<Health>(out Health enemyHealth) && _purposeAttack == (_purposeAttack | (1 << enemyHealth.gameObject.layer)))
         {
-            DealDamage(enemy);
+            DealDamage(enemyHealth);
         }
     }
 
-    private void DealDamage(Enemy enemy)
+    private void DealDamage(Health enemyHealth)
     {
-        enemy.TakeDamage(_damage);
+        enemyHealth.TakeDamage(_damage);
     }
 }
